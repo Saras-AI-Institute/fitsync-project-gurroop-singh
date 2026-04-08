@@ -11,23 +11,25 @@ def load_data():
     file_path = 'data/health_data.csv'
     data = pd.read_csv(file_path)
     
+    # Standardize the DataFrame column names to lower case
+    data.columns = [column.lower() for column in data.columns]
+
     # Fill missing values intelligently
     # Fill missing 'steps' with the median value of the column
     if 'steps' in data.columns:
         median_steps = data['steps'].median()
         data['steps'].fillna(median_steps, inplace=True)
 
-    # Fill missing 'Sleep_Hours' with 7.0
-    if 'Sleep_Hours' in data.columns:
-        data['Sleep_Hours'].fillna(7.0, inplace=True)
+    # Fill missing 'sleep_hours' with 7.0
+    if 'sleep_hours' in data.columns:
+        data['sleep_hours'].fillna(7.0, inplace=True)
 
-    # Fill missing 'Heart_Rate_Bpm' with 68
-    if 'Heart_Rate_Bpm' in data.columns:
-        data['Heart_Rate_Bpm'].fillna(68, inplace=True)
-
+    # Fill missing 'heart_rate_bpm' with 68
+    if 'heart_rate_bpm' in data.columns:
+        data['heart_rate_bpm'].fillna(68, inplace=True)
     # Fill missing values in all other columns with their respective median
     for column in data.columns:
-        if column not in ['steps', 'Sleep_Hours', 'Heart_Rate_Bpm', 'date']:
+        if column not in ['steps', 'sleep_hours', 'heart_rate_bpm', 'date']:
             median_value = data[column].median()
             data[column].fillna(median_value, inplace=True)
 
@@ -38,9 +40,9 @@ def load_data():
     return data
 
 
-def calculate_recover_score(df):
+def calculate_recovery_score(df):
     """
-    Calculate and add a new column 'Recovery_Score' to the DataFrame, reflecting body recovery status (0 to 100).
+    Calculate and add a new column 'recovery_score' to the DataFrame, reflecting body recovery status (0 to 100).
     """
     scores = []
     for index, row in df.iterrows():
@@ -48,16 +50,16 @@ def calculate_recover_score(df):
         score = 50
 
         # Adjust based on Sleep_Hours
-        if row['Sleep_Hours'] >= 7:
+        if row['sleep_hours'] >= 7:
             score += 20  # Good sleep
-        elif row['Sleep_Hours'] < 6:
+        elif row['sleep_hours'] < 6:
             score -= 20  # Poor sleep
 
         # Adjust based on Heart_Rate_Bpm (lower is better)
-        if 50 <= row['Heart_Rate_Bpm'] <= 95:
-            if row['Heart_Rate_Bpm'] < 60:
+        if 50 <= row['heart_rate_bpm'] <= 95:
+            if row['heart_rate_bpm'] < 60:
                 score += 10
-            elif row['Heart_Rate_Bpm'] > 80:
+            elif row['heart_rate_bpm'] > 80:
                 score -= 10
 
         # Adjust based on Steps (higher is generally good, but very high can be straining)
@@ -71,7 +73,22 @@ def calculate_recover_score(df):
         score = max(0, min(100, score))
         scores.append(score)
 
-    # Add 'Recovery_Score' column to the DataFrame
-    df['Recovery_Score'] = scores
+    # Add 'recovery_score' column to the DataFrame
+    df['recovery_score'] = scores
+    return df
+
+
+def process_data():
+    """
+    Main function to process health data for the Streamlit dashboard.
+    It loads, calculates recovery scores, and returns the processed DataFrame.
+    """
+    # Load the cleaned data
+    df = load_data()
+
+    # Calculate the recovery score
+    df = calculate_recovery_score(df)  # Corrected function name
+
+    # Return the final processed DataFrame
     return df
 
