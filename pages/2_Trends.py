@@ -17,8 +17,13 @@ time_range = st.sidebar.selectbox(
     index=2
 )
 
+# Use st.cache_data to cache processed data
+@st.cache_data
+def get_processed_data():
+    return process_data()
+
 # Load and process the data
-df = process_data()
+df = get_processed_data()
 
 # Filter the DataFrame based on time range
 if time_range == "Last 7 days":
@@ -61,3 +66,4 @@ fig = px.histogram(
     facet_col_wrap=2
 )
 st.plotly_chart(fig, use_container_width=True)
+

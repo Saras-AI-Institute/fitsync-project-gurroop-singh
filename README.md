@@ -1,12 +1,20 @@
-# 🚀 Code with AI: FitSync Analytics
+# FitSync - Health Analytics Platform 🚀
+*Empower your health journey with insightful analytics!*
 
-Welcome to the **FitSync** project! This repository is your home for the next 5 weeks as we build a professional-grade health analytics dashboard using AI-driven workflows.
+## Project Overview
+FitSync is a sophisticated Python-based health analytics platform designed to offer personal insights into your health metrics. Built with Streamlit, this three-page application provides a comprehensive dashboard featuring Key Performance Indicators (KPIs) and charts, along with detailed trends displayed through histograms and insights. Ideal for personal use or as a demonstration of data-driven health analytics capabilities, FitSync seamlessly merges data processing with visual storytelling to guide users in their wellness journey.
 
-## 📋 Project Basics
-* **Project Title:** FitSync (Personal Health Analytics)
-* **Course:** Code with AI 
-* **Institution:** Saras AI Institute 
+## Tech Stack
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-0.82.0-red)
+![Pandas](https://img.shields.io/badge/Pandas-1.2.0-green)
+![Plotly](https://img.shields.io/badge/Plotly-4.14.3-orange)
+![GitHub Codespaces](https://img.shields.io/badge/GitHub_Codespaces-✓-lightgrey)
 
+## How to Run
+1. Clone the repository: `git clone <repository-url>`
+2. Open a new GitHub Codespace.
+3. In the terminal, execute the command: `streamlit run main.py`
 ## 🛠️ Repository Setup & Naming
 **CRITICAL:** When you clone the repository, ensure your repository follows this naming convention:
 `fitsync-project-firstname-lastname`
@@ -32,5 +40,9 @@ You are expected to commit your progress after every live session.
 3. Paste this URL into the **Module 1 Assignment** slot in the **LMS (Learning Management System)**.
 4. **Note:** Your code will also be automatically graded via GitHub Actions.
 
+## Built with AI 🤖
+This project harnessed the power of AI through the Continue agent within GitHub Codespaces. While AI accelerated tasks like syntax suggestion, the architecture, and data logic were meticulously crafted and owned by [Your Name]. This harmonious collaboration ensured rapid development without compromising on innovation and functionality.
+
 ---
 *Built with GitHub Copilot & Cursor @ Saras AI Institute*.
+
